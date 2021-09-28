@@ -10,15 +10,11 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
 
-class AppSignatureHelper(context: Context?) :
-    ContextWrapper(context) {// Get all package signatures for the current package
+private const val TAG = "AppSignatureHelper"
 
-    // For each signature create a compatible hash
-    /**
-     * Get all the app signatures for the current package
-     * @return
-     */
-    val appSignatures: ArrayList<String>
+class AppSignatureHelper(context: Context?) :
+    ContextWrapper(context) {
+    val appSignature: ArrayList<String>
         get() {
             val appCodes = ArrayList<String>()
             try {
@@ -50,7 +46,6 @@ class AppSignatureHelper(context: Context?) :
         }
 
     companion object {
-        val TAG = AppSignatureHelper::class.java.simpleName
         private const val HASH_TYPE = "SHA-256"
         const val NUM_HASHED_BYTES = 9
         const val NUM_BASE64_CHAR = 11
@@ -74,9 +69,7 @@ class AppSignatureHelper(context: Context?) :
                     Base64.NO_PADDING or Base64.NO_WRAP
                 )
                 base64Hash = base64Hash.substring(0, NUM_BASE64_CHAR)
-                Log.d(
-                    TAG,
-                    String.format("pkg: %s -- hash: %s", packageName, base64Hash)
+                Log.d(TAG, String.format("pkg: %s -- hash: %s", packageName, base64Hash)
                 )
                 return base64Hash
             } catch (e: NoSuchAlgorithmException) {
