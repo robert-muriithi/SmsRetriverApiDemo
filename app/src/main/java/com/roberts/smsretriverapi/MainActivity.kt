@@ -2,6 +2,7 @@ package com.roberts.smsretriverapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.StringUtils
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
+private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityMainBinding
     private lateinit var smsClient: SmsRetrieverClient
@@ -21,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         smsClient = SmsRetriever.getClient(this)
 
 
-        /*val appSignatureHelper = AppSignatureHelper(this)
-        Log.d("SIGNATURE",appSignatureHelper.appSignature.toString())*/
+        val appSignatureHelper = AppSignatureHelper(this)
+        Log.d("SIGNATURE",appSignatureHelper.appSignature.toString())
 
         initSmsListener()
 
