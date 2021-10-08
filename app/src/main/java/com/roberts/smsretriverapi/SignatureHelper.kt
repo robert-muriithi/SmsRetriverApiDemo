@@ -64,7 +64,8 @@ class SignatureHelper(context: Context?) :
                     Base64.NO_PADDING or Base64.NO_WRAP
                 )
                 base64Hash = base64Hash.substring(0, BASE64_CHAR)
-                Log.d(TAG, String.format("pkg: %s -- hash: %s", pkgName, base64Hash)
+                Log.d(
+                    TAG, String.format("pkg: %s -- hash: %s", pkgName, base64Hash)
                 )
                 return base64Hash
             } catch (error: NoSuchAlgorithmException) {

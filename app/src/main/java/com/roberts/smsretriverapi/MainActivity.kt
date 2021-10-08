@@ -12,8 +12,9 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 private const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
-    private lateinit var  binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var smsClient: SmsRetrieverClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         initSmsListener()
 
     }
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
@@ -38,27 +40,32 @@ class MainActivity : AppCompatActivity() {
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
+
     private fun initSmsListener() {
         smsClient.startSmsRetriever()
             .addOnSuccessListener {
-                Toast.makeText(this, "Waiting for sms message",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this, "Waiting for sms message",
+                    Toast.LENGTH_SHORT
+                ).show()
             }.addOnFailureListener { failure ->
-                Toast.makeText(this, failure.localizedMessage,
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this, failure.localizedMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
     @Subscribe
-    fun onReceiveSms(retrievalEvent: RetrievalEvent){
-        val code: String = StringUtils.substringAfterLast(retrievalEvent.message, "is").replace(":", "")
-            .trim().substring(0, 4)
+    fun onReceiveSms(retrievalEvent: RetrievalEvent) {
+        val code: String =
+            StringUtils.substringAfterLast(retrievalEvent.message, "is").replace(":", "")
+                .trim().substring(0, 4)
 
         runOnUiThread {
-            if(!retrievalEvent.timedOut){
+            if (!retrievalEvent.timedOut) {
                 binding.editText.setText(code)
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
             }
         }

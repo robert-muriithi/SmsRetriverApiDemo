@@ -10,18 +10,18 @@ import org.greenrobot.eventbus.EventBus
 
 class MessageBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (SmsRetriever.SMS_RETRIEVED_ACTION == intent?.action){
+        if (SmsRetriever.SMS_RETRIEVED_ACTION == intent?.action) {
             val data = intent.extras
-            if (data != null){
+            if (data != null) {
                 val status = data[SmsRetriever.EXTRA_STATUS] as Status
                 var timedOut = false
                 var otpCode: String? = null
-                when(status.statusCode){
-                    CommonStatusCodes.SUCCESS ->{
+                when (status.statusCode) {
+                    CommonStatusCodes.SUCCESS -> {
                         val appMessage = data[SmsRetriever.EXTRA_SMS_MESSAGE] as String
                         otpCode = appMessage
                     }
-                    CommonStatusCodes.TIMEOUT ->{
+                    CommonStatusCodes.TIMEOUT -> {
                         timedOut = true
                     }
 
