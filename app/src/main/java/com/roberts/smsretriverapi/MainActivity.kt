@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         smsClient = SmsRetriever.getClient(this)
 
-
-        val appSignatureHelper = AppSignatureHelper(this)
-        Log.d("SIGNATURE",appSignatureHelper.appSignature.toString())
+        //uncomment this to generate your app hash string. You can view the hash string on your log cat when you run the app
+        /*val appSignatureHelper = SignatureHelper(this)
+        Log.d("SIGNATURE",appSignatureHelper.appSignature.toString())*/
 
         initSmsListener()
 
