@@ -1,6 +1,6 @@
 package com.roberts.smsretriverapi
 
-data class SmsRetrievedEvent (
+data class RetrievalEvent (
     val timedOut: Boolean,
     val message: String
     )

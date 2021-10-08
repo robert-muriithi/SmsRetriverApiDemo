@@ -50,12 +50,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    fun onReceiveSms(smsRetrievedEvent: SmsRetrievedEvent){
-        val code: String = StringUtils.substringAfterLast(smsRetrievedEvent.message, "is").replace(":", "")
+    fun onReceiveSms(retrievalEvent: RetrievalEvent){
+        val code: String = StringUtils.substringAfterLast(retrievalEvent.message, "is").replace(":", "")
             .trim().substring(0, 4)
 
         runOnUiThread {
-            if(!smsRetrievedEvent.timedOut){
+            if(!retrievalEvent.timedOut){
                 binding.editText.setText(code)
             }
             else{

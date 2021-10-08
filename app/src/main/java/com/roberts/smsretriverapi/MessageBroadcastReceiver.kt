@@ -26,7 +26,7 @@ class MessageBroadcastReceiver : BroadcastReceiver() {
                     }
 
                 }
-                EventBus.getDefault().post(otpCode?.let { SmsRetrievedEvent(timedOut, it) })
+                EventBus.getDefault().post(otpCode?.let { RetrievalEvent(timedOut, it) })
             }
         }
     }
